@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/photos/favicon.png">
+</head>
+<body>
+    <nav>
+        <div class="nav-overlay">
+            <div class="m-nav-links">
+                <div class="m-nav-item-wrap">
+                    <a href="#">SHOP</a>
+                </div>
+                <div class="m-nav-item-wrap">
+                    <a href="#">ARTISTS</a>
+                </div>
+                <div class="m-nav-item-wrap">
+                    <a href="#">ABOUT</a>
+                </div>
+                <div class="m-nav-item-wrap">
+                    <a href="#">SUBMIT</a>
+                </div>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div class="mobile-nav">
+                <div class="m-nav-left">
+                    <div class="logo-img">
+                        <img src="assets/photos/broccoli-logo 1.svg" alt="">
+                    </div>
+                </div>
+                <div class="m-nav-right">
+                    <div class="hamburger-wrap">
+                        <div class="ham-lines"></div>
+                        <div class="ham-lines"></div>
+                        <div class="ham-lines"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-items-wrap">
+                <div class="nav-left">
+                    <a href="#">SHOP</a>
+                    <a href="#">ARTISTS</a>
+                </div>
+                  <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="assets/photos/broccoli-logo 1.svg" alt="">
+                    </a>
+                </div>
+                <div class="nav-right">
+                    <a href="#">ABOUT</a>
+                    <a href="#" class="nav-link-btn
+                    ">SUBMIT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="details-sec">
+        <div class="container">
+            <div class="artwork-details">
+                <div class="art-img">
+                    <img id="artImage" src="" alt="Artwork">
+                </div>
+                <div class="art-info">
+                    <h1 id="artTitle"></h1>
+                    <div class="top-sec">
+                        <h3 id="artistName"></h3>
+                        <p id="artPrice"></p>
+                    </div>   
+                    <p id="artDescription"></p>
+                    <div class="sizes">
+                        <p><strong>Size:</strong> <span id="artSize"></span></p>
+                        <p><strong>Weight:</strong> <span id="artWeight"></span></p>
+                    </div>
+                    
+                    <a id="buyButton" href="#" target="_blank">BUY NOW</a>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <footer>
+        <div class="f-content-wrap">
+            <div class="left">
+                <div class="logo-marquee f-scroll">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                    <img src="assets/photos/broccoli-logo-big.svg" alt="">
+                </div>
+                <div class="form">
+                    <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
+                    <form action="">
+                        <input type="email" name="e-mail" placeholder="E-MAIL" id="email">
+                        <input type="submit" value="SUBMIT" id="submit"> 
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="f-link-wrap">
+                    <div class="socials">
+                        <a href="#" class="socials-link">INSTAGRAM</a>
+                        <a href="#" class="socials-link">PINTEREST</a>
+                    </div>
+                    <div class="copy">
+                        <p>BROCCOLI STREET @ 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const params = new URLSearchParams(window.location.search);
+            const artId = params.get("id");
+        
+            try {
+                // Fetch artworks.json
+                const response = await fetch("artworks.json");
+                const artworks = await response.json();
+        
+                // Fetch artists.json
+                const artistResponse = await fetch("artists.json");
+                const artists = await artistResponse.json();
+        
+                // Find the artwork by ID
+                const artwork = artworks.find(item => item.id === artId);
+                if (!artwork) {
+                    console.error("Artwork not found.");
+                    return;
+                }
+        
+                // Find the corresponding artist
+                const artist = artists.find(a => a.id === artwork.artistId);
+                const artistName = artist ? artist.name : "Unknown Artist";
+        
+                // **Update page title dynamically**
+                document.title = `${artwork.title} - Artwork Details`;
+        
+                // Populate artwork details
+                document.getElementById("artImage").src = artwork.image;
+                document.getElementById("artTitle").textContent = artwork.title;
+                document.getElementById("artistName").textContent = artistName;
+                document.getElementById("artistName").href = `artist-details.html?id=${artist.id}`; // Link to artist details
+                document.getElementById("artPrice").textContent = artwork.price;
+                document.getElementById("artDescription").textContent = artwork.description;
+                document.getElementById("artSize").textContent = artwork.size;
+                document.getElementById("artWeight").textContent = artwork.weight;
+                document.getElementById("buyButton").href = artwork.paymentLink;
+        
+            } catch (error) {
+                console.error("Error loading artwork or artist data:", error);
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "101",
+        "name": "PAPA TEE",
+        "category": "Painting",
+        "subCategories": ["Mural", "Illustration"],
+        "about": "Papa Tee is a renowned painter known for his cultural and abstract artworks.",
+        "image": "assets/photos/Rectangle 43.png",
+        "links": {
+            "website": "https://papa-tee.com",
+            "instagram": "https://instagram.com/papa_tee"
+        }
+    },
+    {
+        "id": "102",
+        "name": "AMA KUNTA",
+        "category": "Sculpture",
+        "subCategories": ["Woodwork", "Installation Art"],
+        "about": "Ama Kunta specializes in wooden sculptures with deep storytelling elements.",
+        "image": "assets/photos/artists/ama_kunta.png",
+        "links": {
+            "website": "https://amakunta.com",
+            "instagram": "https://instagram.com/ama_kunta"
+        }
+    }
+]

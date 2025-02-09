@@ -1,0 +1,35 @@
+[
+  {
+      "id": "1",
+      "title": "Our Land, Our Heritage",
+      "image": "assets/photos/artworks/Rectangle 57.png",
+      "price": "GHC 5000.00",
+      "description": "A vibrant depiction of cultural heritage and connection to the land.",
+      "size": "24in x 36in",
+      "weight": "2.5kg",
+      "artistId": "101",
+      "paymentLink": "https://payment.example.com/art1"
+  },
+  {
+      "id": "2",
+      "title": "Echoes of Time",
+      "image": "assets/photos/artworks/Rectangle 57.png",
+      "price": "GHC 7500.00",
+      "description": "An abstract representation of time and its passing.",
+      "size": "30in x 40in",
+      "weight": "3.2kg",
+      "artistId": "102",
+      "paymentLink": "https://payment.example.com/art2"
+  },
+  {
+      "id": "3",
+      "title": "Golden Horizon",
+      "image": "assets/photos/artworks/Rectangle 57.png",
+      "price": "GHC 6000.00",
+      "description": "A stunning sunset over the rolling hills, painted in gold hues.",
+      "size": "28in x 28in",
+      "weight": "2.8kg",
+      "artistId": "101",
+      "paymentLink": "https://payment.example.com/art3"
+  }
+]
