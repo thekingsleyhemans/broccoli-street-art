@@ -26,6 +26,9 @@
 a {
   cursor: pointer;
 }
+img{
+  pointer-events: none;
+}
 /* Prevent horizontal scrolling */
 html, body {
   overflow-x: hidden; /* Disable horizontal scroll */
