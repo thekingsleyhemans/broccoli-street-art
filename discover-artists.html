@@ -117,42 +117,6 @@
     <section class="discover">
         <div class="container  border-con">
             <div class="artist-wrap">
-                <div class="artist-card">
-                    <div class="card-img">
-                        <img src="assets/photos/artworks/Rectangle 57.png" alt="">
-                    </div>
-                    <div class="card-details">
-                        <h3>PAPA TEE</h3>
-                        <p>PAINTING</p>
-                    </div>
-                    <div class="card-btns">
-                        <a href="#" id="buy">LEARN MORE</a>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="card-img">
-                        <img src="assets/photos/artworks/Rectangle 57.png" alt="">
-                    </div>
-                    <div class="card-details">
-                        <h3>PAPA TEE</h3>
-                        <p>PAINTING</p>
-                    </div>
-                    <div class="card-btns">
-                        <a href="#" id="buy">LEARN MORE</a>
-                    </div>
-                </div>
-                <div class="artist-card">
-                    <div class="card-img">
-                        <img src="assets/photos/artworks/Rectangle 57.png" alt="">
-                    </div>
-                    <div class="card-details">
-                        <h3>PAPA TEE</h3>
-                        <p>PAINTING</p>
-                    </div>
-                    <div class="card-btns">
-                        <a href="#" id="buy">LEARN MORE</a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="sec-btn">
@@ -199,8 +163,48 @@
             </div>
         </div>
     </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        try {
+            // Fetch artists JSON
+            const artistsResponse = await fetch("artists.json");
+            const artists = await artistsResponse.json();
+            console.log(artists); // Log artists data to the console for debugging
     
-    <script src="script.js"></script>
+            // Check if the artistWrap element exists
+            const artistWrap = document.querySelector(".artist-wrap");
+            if (!artistWrap) {
+                console.error("Error: .artist-wrap not found in this HTML file.");
+                return; // Exit if element doesn't exist
+            }
+    
+            artistWrap.innerHTML = ""; // Clear static artist cards
+    
+            artists.forEach(artist => {
+                const artistCard = document.createElement("div");
+                artistCard.classList.add("artist-card");
+    
+                artistCard.innerHTML = `
+                    <div class="card-img">
+                        <img src="${artist.image}" alt="${artist.name}">
+                    </div>
+                    <div class="card-details">
+                        <h3>${artist.name}</h3>
+                        <p>${artist.category}</p>
+                    </div>
+                    <div class="card-btns">
+                        <a href="artist-details.html?id=${artist.id}" class="learn-more">LEARN MORE</a>
+                    </div>
+                `;
+    
+                artistWrap.appendChild(artistCard);
+            });
+        } catch (error) {
+            console.error("Error loading data:", error);
+        }
+    });
+    
+</script>
 </body>
 
 </html>

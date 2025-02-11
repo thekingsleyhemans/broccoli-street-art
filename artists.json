@@ -10,17 +10,5 @@
             "website": "https://papa-tee.com",
             "instagram": "https://instagram.com/papa_tee"
         }
-    },
-    {
-        "id": "102",
-        "name": "AMA KUNTA",
-        "category": "Sculpture",
-        "subCategories": ["Woodwork", "Installation Art"],
-        "about": "Ama Kunta specializes in wooden sculptures with deep storytelling elements.",
-        "image": "assets/photos/artists/ama_kunta.png",
-        "links": {
-            "website": "https://amakunta.com",
-            "instagram": "https://instagram.com/ama_kunta"
-        }
     }
 ]
