@@ -798,6 +798,15 @@ input::placeholder {
   .f-link-wrap {
     gap: 2rem;
   }
+  .name-abt #artist-about{
+    font-size: 1.2rem;
+  }
+  #artist-links a{
+    font-size: 1.2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-block: 0.5rem;
+  }
 }
 @media (max-width: 948px) {
   .nav-logo img {
@@ -972,6 +981,32 @@ input::placeholder {
     transform: translateY(0);
     opacity: 1;
   }
+  .artist-details{
+    display: flex;
+    flex-direction: column;
+  }
+  #artist-image{
+    width: 100%;
+    border: 6px solid var(--blacks);
+  }
+  .name-abt{
+    padding-bottom: 5rem;
+  }
+  .name-abt #artist-about{
+    font-size: 2rem;
+  }
+  .product-card{
+    width: 25rem;
+  }
+  .products-wrap{
+    justify-items: center;
+  }
+}
+@media (max-width: 770px) {
+  .card-details h3{
+    font-size: 1.8rem;
+    width: 40%;
+  }
 }
 @media (max-width: 601px) {
   .container{
@@ -1036,5 +1071,25 @@ input::placeholder {
   }
   .card-details h3{
     font-size: 2rem;
+    width: 52%;
+  }
+  .card-details p{
+    font-size: 1.2rem;
+  }
+  .product-card{
+    width: 22rem !important;
+  }
+  .card-btns a{
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 390px) {
+  .product-card{
+    width: 20rem !important;
+  }
+  
+  .card-details h3{
+    font-size: 1.5rem;
+    width: 45%;
   }
 }
