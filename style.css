@@ -38,7 +38,6 @@ html, body {
 
 body {
   background-color: var(--reds);
-  overflow-x: hidden; /* Disable horizontal scroll on body */
   scroll-behavior: smooth;
 }
 .container {
@@ -437,7 +436,6 @@ form {
   outline: none;
   padding: 2rem;
   background-color: transparent;
-  outline: none;
   border: 6px solid var(--blacks);
 }
 #submit {
@@ -1087,7 +1085,7 @@ input::placeholder {
   .product-card{
     width: 20rem !important;
   }
-  
+
   .card-details h3{
     font-size: 1.5rem;
     width: 45%;
