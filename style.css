@@ -54,6 +54,10 @@ nav {
   padding-left: 4rem;
   padding-right: 4rem;
 }
+.m-nav-left .logo-img a{
+  display: block;
+  width: fit-content;
+}
 .nav-items-wrap {
   width: 100%;
   display: flex;
@@ -557,6 +561,7 @@ input::placeholder {
   padding-block: 4rem;
 }
 .artwork-details{
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -575,6 +580,9 @@ input::placeholder {
   font-weight: 500;
   font-size: 4rem;
   color: var(--blacks);
+}
+#artImage{
+  width: 100%;
 }
 .top-sec{
   width: 100%;
@@ -622,6 +630,7 @@ input::placeholder {
   background-color: var(--blacks);
 }
 .art-img{
+  width: 100%;
   border: 6px solid var(--blacks);
   border-right: none;
 }
@@ -805,6 +814,47 @@ input::placeholder {
     padding-left: 1rem;
     padding-block: 0.5rem;
   }
+  .artwork-details{
+    flex-direction: column;
+    border-right: 6px solid var(--blacks) ;
+  }
+  .art-info{
+    padding-block: 1rem;
+  }
+  .top-sec h3 {
+    font-size: 1.5rem;
+  }
+  .top-sec p {
+    font-size: 1.2rem;
+  }
+  .sizes p{
+    font-size: 0.8rem;
+  } 
+  .artist-name p {
+    font-size: 1.2rem;
+  }
+  .artist-name a {
+    font-size: 1.2rem;
+  }
+  .card-details h3 {
+    font-size: 1.5rem;
+  }
+  .card-details p {
+    font-size: 1rem;
+  }
+  .card-btns a {
+    font-size: 1.2rem;
+  }
+  .card-btns #learn {
+    font-size: 1.2rem;
+  }
+  .card-btns #buy {
+    font-size: 1.2rem;
+  }
+  .card-btns .learn-more {
+    font-size: 1.2rem;
+  }
+
 }
 @media (max-width: 948px) {
   .nav-logo img {
