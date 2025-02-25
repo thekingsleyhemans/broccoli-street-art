@@ -8,7 +8,11 @@
         "image": "assets/photos/artists/Untitled Export/DSC02981.jpg",
         "links": {
             "Website": "https://www.facebook.com/share/169s2zUGxG/",
+<<<<<<< HEAD
             "instagr": "https://instagram.com/papa_tee"
+=======
+            "instagram": "https://instagram.com/papa_tee"
+>>>>>>> 45ceefc459ed4f22f56250e7bf1286d70f08fa5e
         }
     }
 ]
