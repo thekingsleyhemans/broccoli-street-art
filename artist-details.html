@@ -205,93 +205,100 @@
     </footer>
     <script src="script.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", async function () {
-            const params = new URLSearchParams(window.location.search);
-            const artistId = params.get("id");
-        
-            try {
-                // Fetch artists.json
-                const artistResponse = await fetch("artists.json");
-                const artists = await artistResponse.json();
-        
-                // Fetch artworks.json
-                const response = await fetch("artworks.json");
-                const artworks = await response.json();
-        
-                // Find the artist by ID
-                const artist = artists.find(a => a.id === artistId);
-                if (!artist) {
-                    console.error("Artist not found.");
-                    return;
-                }
-        
-                // **Update page title dynamically**
-                document.title = `${artist.name} - Artist Details`;
-        
-                // Populate artist details section
-                document.getElementById("artist-name").textContent = artist.name;
-                document.getElementById("artist-image").src = artist.image;
-                document.getElementById("artist-about").textContent = artist.about;
-        
-                // Dynamically add links (website and instagram)
-                const linksContainer = document.getElementById("artist-links");
-                if (artist.links) {
-                    // Website link
-                    if (artist.links.website) {
-                        const websiteLink = document.createElement("a");
-                        websiteLink.href = artist.links.website;
-                        websiteLink.textContent = "Website";
-                        websiteLink.target = "_blank"; // Open in new tab
-                        linksContainer.appendChild(websiteLink);
-                    }
-        
-                    // Instagram link
-                    if (artist.links.instagram) {
-                        const instagramLink = document.createElement("a");
-                        instagramLink.href = artist.links.instagram;
-                        instagramLink.textContent = "Instagram";
-                        instagramLink.target = "_blank"; // Open in new tab
-                        linksContainer.appendChild(instagramLink);
-                    }
-                }
-        
-                // Dynamically add subcategories
-                const subcategoriesContainer = document.querySelector(".artists-subcategories");
-                if (artist.subCategories && artist.subCategories.length > 0) {
-                    artist.subCategories.forEach(subcategory => {
-                        const subcategoryElement = document.createElement("p");
-                        subcategoryElement.textContent = subcategory;
-                        subcategoriesContainer.appendChild(subcategoryElement);
-                    });
-                }
-        
-                // Find related artworks by this artist
-                const artistWorks = artworks.filter(a => a.artistId === artist.id);
-                const productsWrap = document.querySelector(".products-wrap");
-        
-                artistWorks.forEach(art => {
-                    const card = document.createElement("div");
-                    card.classList.add("product-card"); // Add styling class if needed
-                    card.innerHTML = `
-                        <div class="card-img">
-                            <img src="${art.image}" alt="${art.title}">
-                        </div>
-                        <div class="card-details">
-                            <h3>${art.title}</h3>
-                            <p>${art.price}</p>
-                        </div>
-                        <div class="card-btns">
-                            <a href="details.html?id=${art.id}" id="learn">LEARN MORE</a>
-                            <a href="details.html?id=${art.paymentLink}" id="buy">BUY NOW</a>
-                        </div>
-                    `;
-                    productsWrap.appendChild(card);
-                });
-        
-            } catch (error) {
-                console.error("Error loading artist or artwork data:", error);
+      document.addEventListener("DOMContentLoaded", async function () {
+        const params = new URLSearchParams(window.location.search);
+        const artistId = params.get("id");
+    
+        try {
+            // Fetch artists.json
+            const artistResponse = await fetch("artists.json");
+            const artists = await artistResponse.json();
+    
+            // Fetch artworks.json
+            const response = await fetch("artworks.json");
+            const artworks = await response.json();
+    
+            // Find the artist by ID
+            const artist = artists.find(a => a.id === artistId);
+            if (!artist) {
+                console.error("Artist not found.");
+                return;
             }
-        });
+    
+            // **Update page title dynamically**
+            document.title = `${artist.name} - Artist Details`;
+    
+            // Populate artist details section
+            document.getElementById("artist-name").textContent = artist.name;
+            document.getElementById("artist-image").src = artist.image;
+            document.getElementById("artist-about").textContent = artist.about;
+    
+            // Dynamically add links (website and instagram)
+            const linksContainer = document.getElementById("artist-links");
+            linksContainer.innerHTML = ""; // Clear existing content to avoid duplication
+    
+            if (artist.links) {
+                if (artist.links.website) {
+                    const websiteLink = document.createElement("a");
+                    websiteLink.href = artist.links.website;
+                    websiteLink.textContent = "Website";
+                    websiteLink.target = "_blank";
+                    linksContainer.appendChild(websiteLink);
+                }
+    
+                if (artist.links.instagram) {
+                    const instagramLink = document.createElement("a");
+                    instagramLink.href = artist.links.instagram;
+                    instagramLink.textContent = "Instagram";
+                    instagramLink.target = "_blank";
+                    linksContainer.appendChild(instagramLink);
+                }
+            }
+    
+            // Dynamically add subcategories
+            const subcategoriesContainer = document.querySelector(".artists-subcategories");
+            subcategoriesContainer.innerHTML = ""; // Clear existing content
+    
+            if (artist.subCategories && artist.subCategories.length > 0) {
+                artist.subCategories.forEach(subcategory => {
+                    const subcategoryElement = document.createElement("p");
+                    subcategoryElement.textContent = subcategory;
+                    subcategoriesContainer.appendChild(subcategoryElement);
+                });
+            }
+    
+            // Find related artworks by this artist
+            const artistWorks = artworks.filter(a => a.artistId.toString() === artist.id.toString());
+    
+            // Clear previous artworks before adding new ones
+            const productsWrap = document.querySelector(".products-wrap");
+            productsWrap.innerHTML = ""; 
+    
+            // Populate artworks
+            artistWorks.forEach(art => {
+                const card = document.createElement("div");
+                card.classList.add("product-card");
+                card.innerHTML = `
+                    <div class="card-img">
+                        <img src="${art.image}" alt="${art.title}">
+                    </div>
+                    <div class="card-details">
+                        <h3>${art.title}</h3>
+                        <p>${art.price}</p>
+                    </div>
+                    <div class="card-btns">
+                        <a href="details.html?id=${art.id}" id="learn">LEARN MORE</a>
+                        <a href="details.html?id=${art.paymentLink}" id="buy">BUY NOW</a>
+                    </div>
+                `;
+                productsWrap.appendChild(card);
+            });
+    
+        } catch (error) {
+            console.error("Error loading artist or artwork data:", error);
+        }
+    });
+    
         
     </script>
 </body>
