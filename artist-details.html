@@ -238,9 +238,9 @@
             linksContainer.innerHTML = ""; // Clear existing content to avoid duplication
     
             if (artist.links) {
-                if (artist.links.website) {
+                if (artist.links.Website) {
                     const websiteLink = document.createElement("a");
-                    websiteLink.href = artist.links.website;
+                    websiteLink.href = artist.links.Website;
                     websiteLink.textContent = "Website";
                     websiteLink.target = "_blank";
                     linksContainer.appendChild(websiteLink);
