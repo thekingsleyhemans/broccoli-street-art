@@ -131,12 +131,22 @@
                     <img src="assets/photos/broccoli-logo-big.svg" alt="">
                 </div>
                 <div class="form">
-                    <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
-                    <form action="">
-                        <input type="email" name="e-mail" placeholder="E-MAIL" id="email">
-                        <input type="submit" value="SUBMIT" id="submit"> 
-                    </form>
-                </div>
+            <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
+            <form id="mc-embedded-subscribe-form" action="https://website.us10.list-manage.com/subscribe/post?u=413386c5fa2a4c9c4668e7ccb&amp;id=29c710b9a3&amp;f_id=0092dee5f0" method="post" target="_blank" novalidate>
+              <input
+                type="email"
+                name="EMAIL"
+                placeholder="E-MAIL"
+                id="email"
+                required
+              />
+              <input type="submit" value="SUBMIT" id="submit" />
+              <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                <input type="text" name="b_413386c5fa2a4c9c4668e7ccb_29c710b9a3" tabindex="-1" value="">
+              </div>
+            </form>
+            <div id="mc-response" style="display: none;"></div>
+          </div>
             </div>
             <div class="right">
                 <div class="f-link-wrap">
@@ -197,6 +207,27 @@
             }
         });
         
+    </script>
+    <script>
+      document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = event.target;
+        var responseDiv = document.getElementById('mc-response');
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        }).then(function() {
+          responseDiv.style.display = 'block';
+          responseDiv.innerHTML = 'Thank you for subscribing!';
+          form.reset();
+        }).catch(function() {
+          responseDiv.style.display = 'block';
+          responseDiv.innerHTML = 'There was an error. Please try again.';
+        });
+      });
     </script>
 </body>
 </html>
