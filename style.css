@@ -212,23 +212,20 @@ section {
   display: flex;
   overflow: hidden;
   gap: 4rem;
-  white-space: nowrap; /* Prevent text wrapping */
 }
-
 .scroll {
-  display: flex;
-  animation: marquee 30s linear infinite; /* Adjusted animation duration */
+  animation-timeline: auto;
+  animation-range-start: normal;
+  animation-range-end: normal;
+  animation: 100s linear 0s infinite normal none running marquee;
 }
-
 .marquee-wrap,
 .logo-marquee {
   display: flex;
   align-items: center;
   gap: 3rem;
   padding-block: 0.2rem;
-  white-space: nowrap; /* Prevent text wrapping */
 }
-
 .marquee-wrap h1 {
   flex-shrink: 0;
   font-family: "Barlow-Regular";
@@ -236,17 +233,15 @@ section {
   font-size: 5rem;
   font-weight: 400;
 }
-
 .marquee-wrap img {
   width: 5rem;
 }
-
 @keyframes marquee {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0px);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-90% - 1rem));
   }
 }
 .border-con {
