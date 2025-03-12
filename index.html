@@ -323,7 +323,7 @@
           </div>
           <div class="form">
             <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
-            <form action="https://website.us10.list-manage.com/subscribe/post?u=413386c5fa2a4c9c4668e7ccb&amp;id=29c710b9a3&amp;f_id=0092dee5f0" method="post" target="_blank">
+            <form id="mc-embedded-subscribe-form" action="https://website.us10.list-manage.com/subscribe/post?u=413386c5fa2a4c9c4668e7ccb&amp;id=29c710b9a3&amp;f_id=0092dee5f0" method="post" target="_blank" novalidate>
               <input
                 type="email"
                 name="EMAIL"
@@ -336,6 +336,7 @@
                 <input type="text" name="b_413386c5fa2a4c9c4668e7ccb_29c710b9a3" tabindex="-1" value="">
               </div>
             </form>
+            <div id="mc-response" style="display: none;"></div>
           </div>
         </div>
         <div class="right">
@@ -353,5 +354,26 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+      document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = event.target;
+        var responseDiv = document.getElementById('mc-response');
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        }).then(function() {
+          responseDiv.style.display = 'block';
+          responseDiv.innerHTML = 'Thank you for subscribing!';
+          form.reset();
+        }).catch(function() {
+          responseDiv.style.display = 'block';
+          responseDiv.innerHTML = 'There was an error. Please try again.';
+        });
+      });
+    </script>
   </body>
 </html>
