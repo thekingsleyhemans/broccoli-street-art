@@ -219,11 +219,19 @@
         try {
             // Fetch artists.json
             const artistResponse = await fetch("artists.json");
+            if (!artistResponse.ok) {
+                throw new Error(`HTTP error! status: ${artistResponse.status}`);
+            }
             const artists = await artistResponse.json();
+            console.log('Artists data:', artists); // Debugging line
     
             // Fetch artworks.json
             const response = await fetch("artworks.json");
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const artworks = await response.json();
+            console.log('Artworks data:', artworks); // Debugging line
     
             // Find the artist by ID
             const artist = artists.find(a => a.id === artistId);
@@ -236,6 +244,7 @@
             document.title = `${artist.name} - Artist Details`;
     
             // Populate artist details section
+            console.log('Artist data:', artist); // Debugging line
             document.getElementById("artist-name").textContent = artist.name;
             document.getElementById("artist-image").src = artist.image;
             document.getElementById("artist-about").textContent = artist.about;
