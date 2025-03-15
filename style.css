@@ -430,9 +430,18 @@ footer {
   font-weight: 400;
   padding-block: 1rem;
 }
+.form-inputs{
+  display:flex;
+}
+#mc-response{
+  font-family: "Barlow-Medium";
+  font-weight: 500;
+  font-size: 1.5rem;
+}
 form {
   width: 100%;
   display: flex;
+  flex-direction: column;
   padding-bottom: 2rem;
 }
 #email {
