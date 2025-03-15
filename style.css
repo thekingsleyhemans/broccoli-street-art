@@ -702,9 +702,7 @@ input::placeholder {
 .related-section h3{
   font-family: 'Barlow-Medium';
 }
-input:-internal-autofill-selected{
-  background-color: transparent !important;
-}
+
 @media (max-width: 1366px) {
   .content-land h2 {
     font-size: 6rem;
