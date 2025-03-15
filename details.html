@@ -132,10 +132,20 @@
                 </div>
                 <div class="form">
                     <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
-                    <form action="">
-                        <input type="email" name="e-mail" placeholder="E-MAIL" id="email">
-                        <input type="submit" value="SUBMIT" id="submit"> 
-                    </form>
+                    <div class="form">
+                    <h3>DON’T MISS OUT PROMOS AND FRESH RELEASES</h3>
+                    <form id="mc-form">
+                      <input type="email" name="EMAIL" placeholder="E-MAIL" id="email" required>
+                      <input type="submit" value="SUBMIT" id="submit">
+                      <p id="mc-response" style="display:none; color: green; margin-top: 10px;"></p>
+                  
+                      <!-- Hidden field to prevent bot signups -->
+                      <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                          <input type="text" name="b_413386c5fa2a4c9c4668e7ccb_29c710b9a3" tabindex="-1" value="">
+                      </div>
+                  </form>
+
+                </div>
                 </div>
             </div>
             <div class="right">
@@ -196,6 +206,26 @@
                 console.error("Error loading artwork or artist data:", error);
             }
         });
+        document.getElementById("mc-form").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent page reload
+      
+          var formData = new FormData(this);
+          var actionURL = "https://broccolistreet.us1.list-manage.com/subscribe/post?u=4fb4628b506ef1f1ac2f8e3db&amp;id=6b1a8065c7&amp;f_id=00d47ee2f0"; 
+      
+          fetch(actionURL, {
+              method: "POST",
+              body: formData,
+              mode: "no-cors"
+          }).then(() => {
+              document.getElementById("mc-response").textContent = "Thank you! You have been subscribed.";
+              document.getElementById("mc-response").style.display = "block";
+              document.getElementById("mc-form").reset(); // Clear form fields
+          }).catch(() => {
+              document.getElementById("mc-response").textContent = "Oops! Something went wrong. Please try again.";
+              document.getElementById("mc-response").style.color = "red";
+              document.getElementById("mc-response").style.display = "block";
+          });
+      });
         
     </script>
 </body>
