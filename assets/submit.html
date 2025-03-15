@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBMIT - BROCCOLI STREET ART</title>
+    <link rel="stylesheet" href="submit.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.28.5/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="backbutton">
+                <a href="javascript:history.back()">Back</a>
+            </div>
+            <div class="form-wrap">
+                <form id="artwork-form">
+                    <label for="name">Artist Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your name">
+                    <label for="email">Artist E-mail</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email">
+                    <label for="message">About Artist. <span>*For new artists submitting only</span></label>
+                    <textarea name="message" id="message"></textarea>
+                    <label for="photo">Upload a clear photo for yourself. <span>*For new artists submitting only</span></label>
+                    <div class="drop-zone" id="photo-drop-zone">
+                        <span class="drop-zone__prompt">Drag & Drop your photo here or click to upload</span>
+                        <input type="file" name="photo" id="photo" class="drop-zone__input">
+                    </div>
+                    <div class="links">
+                        <div>
+                            <label for="portfolio">Portfolio URL</label>
+                            <input type="text" name="portfolio" id="portfolio">
+                        </div>
+                        <div>
+                            <label for="social-link">Social URL</label>
+                            <input type="text" name="social-link" id="social-link">
+                        </div>
+                    </div>
+                    <label for="title">Artwork Title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter artwork title">
+                    <label for="description">Artwork Description</label>
+                    <textarea name="description" id="description"></textarea>
+                    <label for="artwork">Upload Artwork</label>
+                    <div class="drop-zone" id="artwork-drop-zone">
+                        <span class="drop-zone__prompt">Drag & Drop your artwork here or click to upload</span>
+                        <input type="file" name="artwork" id="artwork" class="drop-zone__input">
+                    </div>
+                    <div class="details">
+                        <div>
+                            <label for="size">Artwork Size</label>
+                            <input type="text" name="size" id="size">
+                        </div>
+                        <div>
+                            <label for="price">Artwork Price (GHS)</label>
+                            <input type="text" name="price" id="price">
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Structure -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Upload File</h2>
+            <div class="drop-zone" id="modal-drop-zone">
+                <span class="drop-zone__prompt">Drag & Drop your file here or click to upload</span>
+                <input type="file" id="modal-file-input" class="drop-zone__input">
+            </div>
+        </div>
+    </div>
+
+    <script src="submit.js"></script>
+</body>
+</html>
