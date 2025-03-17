@@ -5,7 +5,7 @@
         "category": "Painting",
         "subCategories": ["Mural", "Illustration"],
         "about": "Papa Tee is a renowned painter known for his cultural and abstract artworks.",
-        "image": "assets/photos/artists/Untitled Export/DSC02981.jpg",
+        "image": "https://lxbfiwftjwfpsrdjxwfq.supabase.co/storage/v1/object/public/artist-photos//1742231217197_DSC02981.jpg",
         "links": {
 "Website": "https://www.facebook.com/share/169s2zUGxG/",
 "instagram": "https://instagram.com/papa_tee"
