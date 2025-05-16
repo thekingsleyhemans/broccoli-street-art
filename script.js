@@ -1,8 +1,3 @@
-// Initialize Supabase
-const supabaseUrl = "https://lxbfiwftjwfpsrdjxwfq.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4YmZpd2Z0andmcHNyZGp4d2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2MjY4MTMsImV4cCI6MjA1NzIwMjgxM30.Vg69HlP2myU0716i0nB7Mmd6_dxLRecLxixpSj7HWls";
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
 async function fetchAndRenderData() {
     try {
         // Fetch data from JSON files
@@ -13,6 +8,10 @@ async function fetchAndRenderData() {
 
         const jsonArtworks = await jsonArtworksResponse.json();
         const jsonArtists = await jsonArtistsResponse.json();
+
+        // Debugging: Log fetched data
+        console.log("Artworks:", jsonArtworks);
+        console.log("Artists:", jsonArtists);
 
         // Populate Artworks Section
         const productsWrap = document.querySelector(".products-wrap");
