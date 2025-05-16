@@ -1,13 +1,23 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    try {
-        // Fetch artworks and artists JSON
-        const [artworksResponse, artistsResponse] = await Promise.all([
-            fetch("artworks.json"),
-            fetch("artists.json")
-        ]);
+// Initialize Supabase
+const supabaseUrl = "https://lxbfiwftjwfpsrdjxwfq.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4YmZpd2Z0andmcHNyZGp4d2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2MjY4MTMsImV4cCI6MjA1NzIwMjgxM30.Vg69HlP2myU0716i0nB7Mmd6_dxLRecLxixpSj7HWls";
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        const artworks = await artworksResponse.json();
-        const artists = await artistsResponse.json();
+async function fetchAndRenderData() {
+    try {
+        // Fetch data from Supabase
+        const { data: artworks, error: artworksError } = await supabase
+            .from("artworks")
+            .select("*");
+
+        const { data: artists, error: artistsError } = await supabase
+            .from("artists")
+            .select("*");
+
+        if (artworksError || artistsError) {
+            console.error("Error fetching data from Supabase:", artworksError || artistsError);
+            return;
+        }
 
         // Populate Artworks Section
         const productsWrap = document.querySelector(".products-wrap");
@@ -65,10 +75,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
         console.error("Error loading data:", error);
     }
-});
+}
+
+// Call fetchAndRenderData on page load
+document.addEventListener("DOMContentLoaded", fetchAndRenderData);
+
+// Listen for Supabase updates and re-fetch data
+supabase
+    .from("artworks")
+    .on("INSERT", fetchAndRenderData)
+    .on("UPDATE", fetchAndRenderData)
+    .on("DELETE", fetchAndRenderData)
+    .subscribe();
+
+supabase
+    .from("artists")
+    .on("INSERT", fetchAndRenderData)
+    .on("UPDATE", fetchAndRenderData)
+    .on("DELETE", fetchAndRenderData)
+    .subscribe();
 
 //Mobile Nav Interactions
- 
+
 const hamburger = document.querySelector('.hamburger-wrap');
 const navOverlay = document.querySelector('.nav-overlay');
 const navItems = document.querySelectorAll('.m-nav-item-wrap');
