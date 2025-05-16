@@ -6,25 +6,37 @@ const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 async function fetchAndRenderData() {
     try {
         // Fetch data from Supabase
-        const { data: artworks, error: artworksError } = await supabase
+        const { data: supabaseArtworks, error: artworksError } = await supabase
             .from("artworks")
             .select("*");
 
-        const { data: artists, error: artistsError } = await supabase
+        const { data: supabaseArtists, error: artistsError } = await supabase
             .from("artists")
             .select("*");
 
         if (artworksError || artistsError) {
             console.error("Error fetching data from Supabase:", artworksError || artistsError);
-            return;
         }
+
+        // Fetch data from JSON files
+        const [jsonArtworksResponse, jsonArtistsResponse] = await Promise.all([
+            fetch("artworks.json"),
+            fetch("artists.json"),
+        ]);
+
+        const jsonArtworks = await jsonArtworksResponse.json();
+        const jsonArtists = await jsonArtistsResponse.json();
+
+        // Combine Supabase and JSON data
+        const artworks = [...(supabaseArtworks || []), ...jsonArtworks];
+        const artists = [...(supabaseArtists || []), ...jsonArtists];
 
         // Populate Artworks Section
         const productsWrap = document.querySelector(".products-wrap");
         productsWrap.innerHTML = ""; // Clear static content
 
         artworks.forEach((art) => {
-            const artist = artists.find(a => a.id === art.artistId);
+            const artist = artists.find((a) => a.id === art.artistId);
             const artistName = artist ? artist.name : "Unknown Artist";
 
             const card = document.createElement("div");
@@ -52,7 +64,7 @@ async function fetchAndRenderData() {
         const artistWrap = document.querySelector(".artist-wrap");
         artistWrap.innerHTML = ""; // Clear static artist cards
 
-        artists.forEach(artist => {
+        artists.forEach((artist) => {
             const artistCard = document.createElement("div");
             artistCard.classList.add("artist-card");
 
@@ -71,7 +83,6 @@ async function fetchAndRenderData() {
 
             artistWrap.appendChild(artistCard);
         });
-
     } catch (error) {
         console.error("Error loading data:", error);
     }
