@@ -5,19 +5,6 @@ const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function fetchAndRenderData() {
     try {
-        // Fetch data from Supabase
-        const { data: supabaseArtworks, error: artworksError } = await supabase
-            .from("artworks")
-            .select("*");
-
-        const { data: supabaseArtists, error: artistsError } = await supabase
-            .from("artists")
-            .select("*");
-
-        if (artworksError || artistsError) {
-            console.error("Error fetching data from Supabase:", artworksError || artistsError);
-        }
-
         // Fetch data from JSON files
         const [jsonArtworksResponse, jsonArtistsResponse] = await Promise.all([
             fetch("artworks.json"),
@@ -27,16 +14,12 @@ async function fetchAndRenderData() {
         const jsonArtworks = await jsonArtworksResponse.json();
         const jsonArtists = await jsonArtistsResponse.json();
 
-        // Combine Supabase and JSON data
-        const artworks = [...(supabaseArtworks || []), ...jsonArtworks];
-        const artists = [...(supabaseArtists || []), ...jsonArtists];
-
         // Populate Artworks Section
         const productsWrap = document.querySelector(".products-wrap");
         productsWrap.innerHTML = ""; // Clear static content
 
-        artworks.forEach((art) => {
-            const artist = artists.find((a) => a.id === art.artistId);
+        jsonArtworks.forEach((art) => {
+            const artist = jsonArtists.find((a) => a.id === art.artistId);
             const artistName = artist ? artist.name : "Unknown Artist";
 
             const card = document.createElement("div");
@@ -64,7 +47,7 @@ async function fetchAndRenderData() {
         const artistWrap = document.querySelector(".artist-wrap");
         artistWrap.innerHTML = ""; // Clear static artist cards
 
-        artists.forEach((artist) => {
+        jsonArtists.forEach((artist) => {
             const artistCard = document.createElement("div");
             artistCard.classList.add("artist-card");
 
@@ -90,21 +73,6 @@ async function fetchAndRenderData() {
 
 // Call fetchAndRenderData on page load
 document.addEventListener("DOMContentLoaded", fetchAndRenderData);
-
-// Listen for Supabase updates and re-fetch data
-supabase
-    .from("artworks")
-    .on("INSERT", fetchAndRenderData)
-    .on("UPDATE", fetchAndRenderData)
-    .on("DELETE", fetchAndRenderData)
-    .subscribe();
-
-supabase
-    .from("artists")
-    .on("INSERT", fetchAndRenderData)
-    .on("UPDATE", fetchAndRenderData)
-    .on("DELETE", fetchAndRenderData)
-    .subscribe();
 
 //Mobile Nav Interactions
 
